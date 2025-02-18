@@ -1,5 +1,10 @@
 group = "il.co.bezeq.wifi_manager"
 version = "1.0-SNAPSHOT"
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
 
 buildscript {
     ext.kotlin_version = "1.8.22"

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wifi_manager/wifi_info_model.dart';
 import 'package:wifi_manager/wifi_manager.dart';
 
 void main() {
@@ -31,10 +32,21 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _wifiManagerPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _wifiManagerPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
+    }
+
+    Future<WifiInfoModel?> loadWifiInfo() async {
+      String wifiInfo;
+      try {
+        wifiInfo =
+            await _wifiManagerPlugin.getWifiInfo() ?? 'Unknown wifi info';
+      } on PlatformException {
+        wifiInfo = 'Failed to get wifi info.';
+      }
+      return wifiInfo;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
